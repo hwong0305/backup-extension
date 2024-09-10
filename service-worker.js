@@ -2,8 +2,8 @@
 
 async function reddenStory() {
   const html = window.document.children[0].innerHTML
-  const idx = html.search('"user":{"pk":')
-  const id = html.slice(idx).match(/{"pk":"(\d+)\"/)[1]
+  const idx = html.search('profilePage_')
+  const id = html.slice(idx).match(/profilePage_(\d+)/)[1]
   const uri = `https://www.instagram.com/graphql/query/?query_hash=de8017ee0a7c9c45ec4260733d81ea31&variables=%7B%22reel_ids%22%3A%5B${id}%5D%2C%22tag_names%22%3A%5B%5D%2C%22location_ids%22%3A%5B%5D%2C%22highlight_reel_ids%22%3A%5B%5D%2C%22precomposed_overlay%22%3Afalse%2C%22show_story_viewer_list%22%3Atrue%2C%22story_viewer_fetch_count%22%3A50%2C%22story_viewer_cursor%22%3A%22%22%7D`
 
   const response = await fetch(uri)
@@ -65,14 +65,13 @@ async function reddenPage() {
 }
 
 chrome.action.onClicked.addListener((tab) => {
-  if (tab.url.includes('https://www.instagram.com/p')) {
+  if (tab.url.startsWith('https://www.instagram.com/p')) {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       function: reddenPage,
     })
   }
-  if (tab.url.includes('https://www.instagram.com/stories')) {
-    console.log('triggering')
+  if (tab.url.includes('https://www.instagram.com/')) {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       function: reddenStory,
