@@ -25,7 +25,6 @@ async function reddenStory() {
   })
   videoSrc.forEach((video) => {
     window.open(video, '_blank')
-    chrome.tabs.create({ url: video })
   })
 }
 
@@ -60,7 +59,6 @@ async function reddenPage() {
   })
   videoSrc.forEach((video) => {
     window.open(video, '_blank')
-    chrome.tabs.create({ url: video })
   })
 }
 
@@ -70,8 +68,7 @@ chrome.action.onClicked.addListener((tab) => {
       target: { tabId: tab.id },
       function: reddenPage,
     })
-  }
-  if (tab.url.includes('https://www.instagram.com/')) {
+  } else if (tab.url.includes('https://www.instagram.com/')) {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       function: reddenStory,
