@@ -9,9 +9,6 @@ async function reddenStory() {
   const response = await fetch(uri)
   const json = await response.json()
 
-  console.log(json)
-  console.log('data' in json)
-
   const imgSrc = []
   const videoSrc = []
   json.data.reels_media[0].items.forEach((media) => {
