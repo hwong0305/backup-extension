@@ -63,7 +63,7 @@ async function reddenPage() {
 }
 
 chrome.action.onClicked.addListener((tab) => {
-  if (tab.url.startsWith('https://www.instagram.com/p')) {
+  if (tab.url.startsWith('https://www.instagram.com/p/')) {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       function: reddenPage,
