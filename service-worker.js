@@ -49,8 +49,10 @@ async function reddenPage() {
     imgSrc.push(json.items[0].image_versions2.candidates[0].url)
   } else if (json.items[0].media_type === 2) {
     imgSrc.push(json.items[0].image_versions2.candidates[0].url)
-    imgSrc.push(json.items[0].image_versions2.additional_candidates.first_frame.url)
-    imgSrc.push(json.items[0].image_versions2.additional_candidates.igtv_first_frame.url)
+    if (json.items[0].image_versions2.additional_candidates) {
+      imgSrc.push(json.items[0].image_versions2.additional_candidates.first_frame.url)
+      imgSrc.push(json.items[0].image_versions2.additional_candidates.igtv_first_frame.url)
+    }
     videoSrc.push(json.items[0].video_versions[0].url)
   }
 
